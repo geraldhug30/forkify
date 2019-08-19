@@ -28,7 +28,7 @@ export default class Recipe {
 		this.time = periods *15;
 	}
 	calcServings(){
-		this.serving = 4;
+		this.servings = 4;
 	}
 	parseIngredients(){
 			const unitsLong = ['tablespoons','tablespoon','ounces','ounce', 'teaspoons', 'teaspoon', 'cups', 'pounds'];
@@ -91,22 +91,15 @@ export default class Recipe {
 
 	updateServings(type) {
 		//servings
-		let newServings;
-		if(type === 'dec'){
-			newServings = this.servings - 1;
-			return newServings;
-		} else {
-			newServings = this.servings + 1;
-			return newServings;
-		};
-		console.log(newServings);
+		 const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1; 	
 //Ingredients
 //episode 23 0912
 
 		this.ingredients.forEach(ing => {
-			ing.count *= (newServings / this.servings);
+			ing.count = ing.count * (newServings / this.servings);
 		});
 		
 		this.servings = newServings;
+		console.log(this.ingredients);
 	}
 }
